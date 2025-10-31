@@ -1,72 +1,72 @@
 package controller;
 
 import dao.AlunoDAO;
+import dao.AvaliacaoDAO;
 import dao.Conexao;
-import dao.ConexaoAvaliacao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.Aluno;
-import view.Cadastro;
+import model.AvaliacaoModel;
+import view.Avaliacao;
 
 public class ControleAvaliacao {
-    /*private Cadastro tela3;
+    private Avaliacao tela3;
 
     // REMOVIDA A LINHA COM ERRO: // ControleCadastro c = new ControleCadastro(this);
 
-    public ControleAvaliacao(Cadastro tela3){
+    public ControleAvaliacao(Avaliacao tela3){
         this.tela3 = tela3;
     }
 
-    public void salvarAvaliacao(){
-        String email = tela3.getTxtCadastroEmail().getText();
-        //String descricao = tela3.getTxtAreaAvaliacao().getText();
-        //String nota = tela3.rb5().isSelected() ? "★" : 
-                        //"★★" : "★★★" : "★★★★" : "★★★★★";
+    public void salvarAvaliacao() {
+        String email1 = tela3.getTxtAvaliacaoEmail().getText();
+        String nota = tela3.getRb1().isSelected() ? "★" :
+                      tela3.getRb2().isSelected() ? "★★" :
+                      tela3.getRb3().isSelected() ? "★★★" :
+                      tela3.getRb4().isSelected() ? "★★★★" :
+                      tela3.getRb5().isSelected() ? "★★★★★" : "";
+        String descricao = tela3.getTxtAreaAvaliacao().getText();
 
-        // VALIDAÇÃO INICIAL DE CAMPOS VAZIOS
-        if (email.isEmpty() || descricao.isEmpty() || nota.isEmpty()) {
+        if (email1.isEmpty() || nota.isEmpty() || descricao.isEmpty()) {
             JOptionPane.showMessageDialog(tela3, "Todos os campos devem ser preenchidos.", "Atenção", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        ConexaoAvaliacao conexaoAvaliacao = new ConexaoAvaliacao();
+        Conexao conexaoAvaliacao = new Conexao();
         Connection conn = null;
-        
+
         try {
             conn = conexaoAvaliacao.getConnection();
-            AlunoDAO dao = new AlunoDAO(conn);
-            
-            // *** VERIFICAÇÃO DE DUPLICIDADE ***
-            if (dao.verificarEmailExistente(email)) {
-                JOptionPane.showMessageDialog(tela3, 
-                    "Este e-mail já está cadastrado. Por favor, utilize outro.", 
-                    "Email Duplicado", 
+
+            // Verifica se o e-mail existe no cadastro de usuários
+            AlunoDAO alunoDAO = new AlunoDAO(conn);
+            if (!alunoDAO.verificarEmailExistente(email1)) {
+                JOptionPane.showMessageDialog(tela3,
+                    "Este e-mail não está cadastrado. Faça o login antes de avaliar.",
+                    "Erro de E-mail",
                     JOptionPane.ERROR_MESSAGE);
-                return; // Interrompe a inserção
+                return;
             }
-            
-            // SE NÃO EXISTE, INSERE
-            Aluno aluno = new Aluno(email, descricao, nota);
-            dao.inserir(aluno);
-            
-            JOptionPane.showMessageDialog(tela3, 
-                    "Registrado a avaliação com sucesso!", 
-                    "Sucesso", 
+
+            // Se o email existe, salva a avaliação
+            AvaliacaoModel avaliacao = new AvaliacaoModel(email1, descricao, nota);
+            AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO(conn);
+            avaliacaoDAO.inserir(avaliacao);
+
+            JOptionPane.showMessageDialog(tela3,
+                    "Avaliação registrada com sucesso!",
+                    "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
-            
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(tela3, "Erro ao registrar a sua avaliação: " + ex.getMessage(), "Erro",
-                                         JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(tela3, "Erro ao registrar avaliação: " + ex.getMessage(),
+                    "Erro", JOptionPane.ERROR_MESSAGE);
         } finally {
-            // Fecha a conexão
             if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    System.err.println("Erro ao fechar conexão: " + e.getMessage());
-                }
+                try { conn.close(); } catch (SQLException e) { }
             }
         }
-    }*/
+    }
+
 }
