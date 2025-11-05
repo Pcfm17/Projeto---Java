@@ -32,19 +32,20 @@ public class JanelaInicial extends javax.swing.JFrame {
         btCarrinho = new javax.swing.JButton();
         btHistorico = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
-        btEstabelicimento = new javax.swing.JButton();
         btAvaliacao = new javax.swing.JButton();
+        btCadastrarPedido = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btAlimento.setText("Alimento");
+        btAlimento.setText("Busca de Alimentos");
         btAlimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAlimentoActionPerformed(evt);
             }
         });
 
-        btBebida.setText("Bebida");
+        btBebida.setText("Busca de Bebidas");
         btBebida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btBebidaActionPerformed(evt);
@@ -79,13 +80,6 @@ public class JanelaInicial extends javax.swing.JFrame {
             }
         });
 
-        btEstabelicimento.setText("Estabelicimento");
-        btEstabelicimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEstabelicimentoActionPerformed(evt);
-            }
-        });
-
         btAvaliacao.setText("Avaliação");
         btAvaliacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,43 +87,65 @@ public class JanelaInicial extends javax.swing.JFrame {
             }
         });
 
+        btCadastrarPedido.setText("Cadastrar Pedido");
+        btCadastrarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadastrarPedidoActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        jLabel1.setText("Selecione uma das opções");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(149, 149, 149))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btAlimento)
-                .addGap(18, 18, 18)
-                .addComponent(btBebida)
-                .addGap(18, 18, 18)
-                .addComponent(btPesquisa)
-                .addGap(18, 18, 18)
-                .addComponent(btCarrinho)
-                .addGap(18, 18, 18)
-                .addComponent(btEstabelicimento)
-                .addGap(18, 18, 18)
-                .addComponent(btHistorico)
-                .addGap(18, 18, 18)
-                .addComponent(btAvaliacao)
-                .addGap(18, 18, 18)
-                .addComponent(btVoltar)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btCadastrarPedido)
+                    .addComponent(btAlimento))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btAvaliacao, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btBebida))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btPesquisa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCarrinho, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(108, 108, 108)
+                .addComponent(btHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75)
+                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btAlimento)
-                    .addComponent(btBebida)
-                    .addComponent(btPesquisa)
-                    .addComponent(btCarrinho)
-                    .addComponent(btVoltar)
-                    .addComponent(btEstabelicimento)
-                    .addComponent(btHistorico)
-                    .addComponent(btAvaliacao))
-                .addContainerGap(329, Short.MAX_VALUE))
+                    .addComponent(btBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btCadastrarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAvaliacao, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -165,12 +181,6 @@ public class JanelaInicial extends javax.swing.JFrame {
         janelaCarrinho.setVisible(true);
     }//GEN-LAST:event_btCarrinhoActionPerformed
 
-    private void btEstabelicimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEstabelicimentoActionPerformed
-        this.dispose();
-        Estabelicimento janelaEstabelicimento = new Estabelicimento();
-        janelaEstabelicimento.setVisible(true);
-    }//GEN-LAST:event_btEstabelicimentoActionPerformed
-
     private void btAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAvaliacaoActionPerformed
         this.dispose();
         Avaliacao janelaBebida = new Avaliacao();
@@ -183,14 +193,21 @@ public class JanelaInicial extends javax.swing.JFrame {
         janelaCadastro.setVisible(true);
     }//GEN-LAST:event_btVoltarActionPerformed
 
+    private void btCadastrarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarPedidoActionPerformed
+        this.dispose();
+        CadastrarPedido janelaCadastroPedido = new CadastrarPedido();
+        janelaCadastroPedido.setVisible(true);
+    }//GEN-LAST:event_btCadastrarPedidoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlimento;
     private javax.swing.JButton btAvaliacao;
     private javax.swing.JButton btBebida;
+    private javax.swing.JButton btCadastrarPedido;
     private javax.swing.JButton btCarrinho;
-    private javax.swing.JButton btEstabelicimento;
     private javax.swing.JButton btHistorico;
     private javax.swing.JButton btPesquisa;
     private javax.swing.JButton btVoltar;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,6 +6,7 @@ package view;
 
 import controller.ControlePesquisa;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -22,17 +23,39 @@ public class Pesquisa extends javax.swing.JFrame {
         //correto
     }
 
-    public JButton getBtmExibir() {
-        return btmExibir;
+    public JTextField getTxtPesquisaParaSalvarEmail() {
+        return txtPesquisaParaSalvarEmail;
     }
 
-    public JTextField getTxtProcurando() {
-        return txtProcurando;
+    public void setTxtPesquisaParaSalvarEmail(JTextField txtPesquisaParaSalvarEmail) {
+        this.txtPesquisaParaSalvarEmail = txtPesquisaParaSalvarEmail;
+    }
+
+    public JButton getBtmExibir() {
+        return btmPesquisarAlimento;
+    }
+
+    public JTextField getTxtProcurandoAlimento() {
+        return txtProcurandoAlimento;
     }
 
     public javax.swing.JTextArea getJTextArea1() {
-        return jTextArea1;
+        return txtResultadoBuscaAlimento;
     }
+
+    public void setBtmPesquisarAlimento(JButton btmPesquisarAlimento) {
+        this.btmPesquisarAlimento = btmPesquisarAlimento;
+    }
+
+    public void setTxtProcurandoAlimento(JTextField txtProcurandoAlimento) {
+        this.txtProcurandoAlimento = txtProcurandoAlimento;
+    }
+
+    public void setTxtResultadoBuscaAlimento(JTextArea txtResultadoBuscaAlimento) {
+        this.txtResultadoBuscaAlimento = txtResultadoBuscaAlimento;
+    }
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,12 +67,14 @@ public class Pesquisa extends javax.swing.JFrame {
     private void initComponents() {
 
         btVoltar = new javax.swing.JButton();
-        txtProcurando = new javax.swing.JTextField();
+        txtProcurandoAlimento = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         txtResultado = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        btmExibir = new javax.swing.JButton();
+        txtResultadoBuscaAlimento = new javax.swing.JTextArea();
+        btmPesquisarAlimento = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        txtPesquisaParaSalvarEmail = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,47 +85,74 @@ public class Pesquisa extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
-        jLabel1.setText("Procurar usuário por Email");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        txtResultado.setViewportView(jTextArea1);
-
-        btmExibir.setText("Exibir");
-        btmExibir.addActionListener(new java.awt.event.ActionListener() {
+        txtProcurandoAlimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btmExibirActionPerformed(evt);
+                txtProcurandoAlimentoActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        jLabel1.setText("Buscar Alimento");
+
+        txtResultadoBuscaAlimento.setColumns(20);
+        txtResultadoBuscaAlimento.setRows(5);
+        txtResultadoBuscaAlimento.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                txtResultadoBuscaAlimentoAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        txtResultado.setViewportView(txtResultadoBuscaAlimento);
+
+        btmPesquisarAlimento.setText("Pesquisa");
+        btmPesquisarAlimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btmPesquisarAlimentoActionPerformed(evt);
             }
         });
 
         jTextField1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         jTextField1.setText("Pesquisa");
 
+        txtPesquisaParaSalvarEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPesquisaParaSalvarEmailActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Email:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtResultado, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtResultado))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtProcurando))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap(172, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(133, 133, 133)
-                        .addComponent(btVoltar)))
+                        .addComponent(btVoltar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btmPesquisarAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtProcurandoAlimento)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(txtPesquisaParaSalvarEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addComponent(btmExibir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,14 +161,21 @@ public class Pesquisa extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVoltar)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtProcurando, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btmExibir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtResultado, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                    .addComponent(txtPesquisaParaSalvarEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtProcurandoAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btmPesquisarAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76)))
+                .addComponent(txtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -129,16 +188,31 @@ public class Pesquisa extends javax.swing.JFrame {
         janelaInicial.setVisible(true);
     }//GEN-LAST:event_btVoltarActionPerformed
 
-    private void btmExibirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmExibirActionPerformed
-        controller.buscarUsuario();
-    }//GEN-LAST:event_btmExibirActionPerformed
+    private void btmPesquisarAlimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmPesquisarAlimentoActionPerformed
+        controller.salvandoPesquisaDoAlimento();
+    }//GEN-LAST:event_btmPesquisarAlimentoActionPerformed
+
+    private void txtResultadoBuscaAlimentoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtResultadoBuscaAlimentoAncestorAdded
+        controller.salvandoPesquisaDoAlimento();
+    }//GEN-LAST:event_txtResultadoBuscaAlimentoAncestorAdded
+
+    private void txtProcurandoAlimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProcurandoAlimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProcurandoAlimentoActionPerformed
+
+    private void txtPesquisaParaSalvarEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaParaSalvarEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPesquisaParaSalvarEmailActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btVoltar;
-    private javax.swing.JButton btmExibir;
+    private javax.swing.JButton btmPesquisarAlimento;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField txtProcurando;
+    private javax.swing.JTextField txtPesquisaParaSalvarEmail;
+    private javax.swing.JTextField txtProcurandoAlimento;
     private javax.swing.JScrollPane txtResultado;
+    private javax.swing.JTextArea txtResultadoBuscaAlimento;
     // End of variables declaration//GEN-END:variables
 }

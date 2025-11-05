@@ -1,20 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
-/**
- *
- * @author paulo
- */
+import controller.ControleHistorico;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+
 public class Historico extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Historico
-     */
+    private ControleHistorico controle;
+
     public Historico() {
         initComponents();
+        controle = new ControleHistorico(this); // conecta o controller
+    }
+
+    // Getters para o controller acessar os componentes
+    public JTextField getTxtPesquisaParaSalvarEmail() {
+        return txtPesquisaParaSalvarEmail;
+    }
+
+    public JTextArea getTxtResultadoSalvoNaLista() {
+        return txtResultadoSalvoNaLista;
     }
 
     /**
@@ -27,6 +33,11 @@ public class Historico extends javax.swing.JFrame {
     private void initComponents() {
 
         btVoltar2 = new javax.swing.JButton();
+        txtPesquisaParaSalvarEmail = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        btListaDoAlimentoSalvo = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtResultadoSalvoNaLista = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -37,13 +48,54 @@ public class Historico extends javax.swing.JFrame {
             }
         });
 
+        txtPesquisaParaSalvarEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPesquisaParaSalvarEmailActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Email:");
+
+        btListaDoAlimentoSalvo.setText("Listar");
+        btListaDoAlimentoSalvo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btListaDoAlimentoSalvoActionPerformed(evt);
+            }
+        });
+
+        txtResultadoSalvoNaLista.setColumns(20);
+        txtResultadoSalvoNaLista.setRows(5);
+        txtResultadoSalvoNaLista.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                txtResultadoSalvoNaListaAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jScrollPane1.setViewportView(txtResultadoSalvoNaLista);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(322, Short.MAX_VALUE)
-                .addComponent(btVoltar2)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btVoltar2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btListaDoAlimentoSalvo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtPesquisaParaSalvarEmail))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -51,7 +103,15 @@ public class Historico extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btVoltar2)
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPesquisaParaSalvarEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btListaDoAlimentoSalvo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();
@@ -62,8 +122,32 @@ public class Historico extends javax.swing.JFrame {
         JanelaInicial janelaInicial = new JanelaInicial();
         janelaInicial.setVisible(true);
     }//GEN-LAST:event_btVoltar2ActionPerformed
+
+    private void txtPesquisaParaSalvarEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaParaSalvarEmailActionPerformed
+
+    }//GEN-LAST:event_txtPesquisaParaSalvarEmailActionPerformed
+
+    private void txtResultadoSalvoNaListaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtResultadoSalvoNaListaAncestorAdded
+
+    }//GEN-LAST:event_txtResultadoSalvoNaListaAncestorAdded
+
+    private void btListaDoAlimentoSalvoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListaDoAlimentoSalvoActionPerformed
+        String email = txtPesquisaParaSalvarEmail.getText().trim();
+
+            if (email.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Digite um email para buscar o histórico.");
+                return;
+            }
+
+            controle.buscarHistorico(email);
+    }//GEN-LAST:event_btListaDoAlimentoSalvoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btListaDoAlimentoSalvo;
     private javax.swing.JButton btVoltar2;
-    private javax.swing.JButton btVoltar3;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtPesquisaParaSalvarEmail;
+    private javax.swing.JTextArea txtResultadoSalvoNaLista;
     // End of variables declaration//GEN-END:variables
 }

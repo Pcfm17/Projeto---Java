@@ -6,7 +6,6 @@ import dao.Conexao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import model.Aluno;
 import model.AvaliacaoModel;
 import view.Avaliacao;
 

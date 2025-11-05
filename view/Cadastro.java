@@ -115,6 +115,18 @@ public class Cadastro extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        txtCadastroEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCadastroEmailActionPerformed(evt);
+            }
+        });
+
+        txtCadastroSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCadastroSenhaActionPerformed(evt);
+            }
+        });
+
         txtCadastroNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCadastroNomeActionPerformed(evt);
@@ -228,13 +240,20 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_btAcesarLoginActionPerformed
 
     private void txtCadastroNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCadastroNomeActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtCadastroNomeActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void txtCadastroEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCadastroEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCadastroEmailActionPerformed
+
+    private void txtCadastroSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCadastroSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCadastroSenhaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAcesarLogin;
