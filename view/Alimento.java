@@ -14,8 +14,7 @@ import model.AlimentoModel;
 public class Alimento extends javax.swing.JFrame {
 
     public Alimento() {
-        initComponents(); // layout gerado pelo NetBeans (não mexe)
-        ControleAlimento controle = new ControleAlimento(this);
+        initComponents();
     }
 
     public JButton getBtBuscarInformacoesDoAlimento() {

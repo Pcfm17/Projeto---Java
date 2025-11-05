@@ -23,338 +23,110 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="211" max="-2" attributes="0"/>
+              <Component id="btBuscarInformacoesDoAlimento" min="-2" pref="100" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel2" min="-2" pref="83" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="txtPesquisandoInformacaoDoAlimento" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="185" max="32767" attributes="0"/>
+                      <Component id="jTextField1" min="-2" pref="175" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
+                      <Component id="btVoltar2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btVoltar2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtPesquisandoInformacaoDoAlimento" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <Component id="btBuscarInformacoesDoAlimento" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="115" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Component class="javax.swing.JTextField" name="txtPesquisandoInformacaoDoAlimento">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPesquisandoInformacaoDoAlimentoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btVoltar2">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="fa" green="37" red="37" type="rgb"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="Voltar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVoltar2ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI Emoji" size="12" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Alimento"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextField1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI Emoji" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Busca da Bebida"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btBuscarInformacoesDoAlimento">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Buscar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBuscarInformacoesDoAlimentoActionPerformed"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
 
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                          <Component id="btVoltar" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace pref="52" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="12" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btVoltar">
+        <Component class="javax.swing.JTextArea" name="jTextArea1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Voltar"/>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVoltarActionPerformed"/>
+            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="jTextArea1AncestorAdded"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI Emoji" size="14" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Bebida Alco&#xf3;lica"/>
-          </Properties>
-        </Component>
-        <Container class="javax.swing.JPanel" name="jPanel2">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-          </Properties>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="checkbox8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkbox7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkbox1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkbox3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkbox4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkbox5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkbox6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkbox9" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkbox10" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkbox2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="77" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="checkbox15" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="checkbox11" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="checkbox16" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="checkbox17" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="checkbox20" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkbox21" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkbox22" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkbox23" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkbox24" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="checkbox12" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkbox18" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkbox19" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="checkbox13" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="195" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="checkbox14" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="185" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="checkbox2" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkbox15" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="checkbox3" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkbox11" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="checkbox4" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkbox16" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="checkbox1" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkbox17" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="checkbox5" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkbox20" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="checkbox6" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkbox21" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="checkbox9" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkbox22" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="checkbox10" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkbox23" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="checkbox7" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkbox24" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="checkbox8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="checkbox12" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="checkbox18" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="checkbox19" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="330" max="32767" attributes="0"/>
-                          <Component id="checkbox13" min="-2" pref="0" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="340" max="32767" attributes="0"/>
-                          <Component id="checkbox14" min="-2" pref="0" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-          <SubComponents>
-            <Component class="java.awt.Checkbox" name="checkbox1">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Rum"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox2">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Absinto"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox3">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Cacha&#xe7;a"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox4">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Gim"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox5">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Whisky"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox6">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Vodka"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox7">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Champanhe"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox8">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Conhaque"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox9">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Cerveja"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox10">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Vinho"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox11">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Makgeolli"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox12">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Vermute"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox13">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Vermute"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox14">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Vermute"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox15">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Saqu&#xea;"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox16">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Tequila"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox17">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Mezcal"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox18">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Grappa"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox19">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Hidromel"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox20">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Licor"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox21">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Bitter"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox22">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Ouzo"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox23">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Sidra"/>
-              </Properties>
-            </Component>
-            <Component class="java.awt.Checkbox" name="checkbox24">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Soju"/>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
       </SubComponents>
     </Container>
   </SubComponents>
