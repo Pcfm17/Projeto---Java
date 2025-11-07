@@ -4,19 +4,65 @@
  */
 package view;
 
+import controller.ControleCadastrarPedido;
+import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 /**
  *
  * @author paulo
  */
 public class CadastrarPedido extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastrarPedido.class.getName());
+    ControleCadastrarPedido c = new ControleCadastrarPedido(this);
 
     /**
      * Creates new form CadastrarPedido
      */
     public CadastrarPedido() {
         initComponents();
+        c = new ControleCadastrarPedido(this);
+    }
+
+    public JTextField getTxtCadastrarPedidoEmail() {
+        return txtCadastrarPedidoEmail;
+    }
+
+    public void setTxtCadastrarPedidoEmail(JTextField txtCadastrarPedidoEmail) {
+        this.txtCadastrarPedidoEmail = txtCadastrarPedidoEmail;
+    }
+
+    public JTextField getTxtCadastrarPedidoEmailEditar() {
+        return txtCadastrarPedidoEmailEditar;
+    }
+
+    public void setTxtCadastrarPedidoEmailEditar(JTextField txtCadastrarPedidoEmailEditar) {
+        this.txtCadastrarPedidoEmailEditar = txtCadastrarPedidoEmailEditar;
+    }
+
+    public JTextField getTxtCadastrarPedidoNome() {
+        return txtCadastrarPedidoNome;
+    }
+
+    public void setTxtCadastrarPedidoNome(JTextField txtCadastrarPedidoNome) {
+        this.txtCadastrarPedidoNome = txtCadastrarPedidoNome;
+    }
+
+    public JTextField getTxtEditarCadastrarPedidoNomeExistente1() {
+        return txtEditarCadastrarPedidoNomeExistente1;
+    }
+
+    public void setTxtEditarCadastrarPedidoNomeExistente1(JTextField txtEditarCadastrarPedidoNomeExistente1) {
+        this.txtEditarCadastrarPedidoNomeExistente1 = txtEditarCadastrarPedidoNomeExistente1;
+    }
+
+    public JTextField getTxtEditarCadastrarPedidoNomeSubstituicao() {
+        return txtEditarCadastrarPedidoNomeSubstituicao;
+    }
+
+    public void setTxtEditarCadastrarPedidoNomeSubstituicao(JTextField txtEditarCadastrarPedidoNomeSubstituicao) {
+        this.txtEditarCadastrarPedidoNomeSubstituicao = txtEditarCadastrarPedidoNomeSubstituicao;
     }
 
     /**
@@ -29,32 +75,44 @@ public class CadastrarPedido extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        txtCadastrarPedido = new javax.swing.JTextField();
-        btCadastrarPedido = new javax.swing.JButton();
+        txtCadastrarPedidoEmail = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtSalvarCadastrarPedido = new javax.swing.JTextField();
+        txtCadastrarPedidoNome = new javax.swing.JTextField();
         btVoltar = new javax.swing.JButton();
+        btEditarPedido = new javax.swing.JButton();
+        btCriarPedido = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        txtEditarCadastrarPedidoNomeSubstituicao = new javax.swing.JTextField();
+        txtEditarCadastrarPedidoNomeExistente1 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        btExcluirPedido = new javax.swing.JButton();
+        txtCadastrarPedidoEmailEditar = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
         jLabel1.setText("Email");
 
-        txtCadastrarPedido.addActionListener(new java.awt.event.ActionListener() {
+        txtCadastrarPedidoEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCadastrarPedidoActionPerformed(evt);
+                txtCadastrarPedidoEmailActionPerformed(evt);
             }
         });
 
-        btCadastrarPedido.setText("Salvar");
-        btCadastrarPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCadastrarPedidoActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
         jLabel2.setText("Pedido");
+
+        txtCadastrarPedidoNome.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                txtCadastrarPedidoNomeAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         btVoltar.setText("Voltar");
         btVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -63,95 +121,219 @@ public class CadastrarPedido extends javax.swing.JFrame {
             }
         });
 
+        btEditarPedido.setText("Editar");
+        btEditarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditarPedidoActionPerformed(evt);
+            }
+        });
+
+        btCriarPedido.setText("Criar");
+        btCriarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCriarPedidoActionPerformed(evt);
+            }
+        });
+
+        jTextField1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        jTextField1.setText("Cadastrar Pedido");
+
+        txtEditarCadastrarPedidoNomeSubstituicao.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                txtEditarCadastrarPedidoNomeSubstituicaoAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        txtEditarCadastrarPedidoNomeExistente1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                txtEditarCadastrarPedidoNomeExistente1AncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        txtEditarCadastrarPedidoNomeExistente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEditarCadastrarPedidoNomeExistente1ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        jLabel4.setText("Item que esteja salvo");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        jLabel5.setText("Item que deseja inserir no lugar");
+
+        btExcluirPedido.setText("Excluir");
+        btExcluirPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExcluirPedidoActionPerformed(evt);
+            }
+        });
+
+        txtCadastrarPedidoEmailEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCadastrarPedidoEmailEditarActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        jLabel3.setText("Email");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtEditarCadastrarPedidoNomeExistente1))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCadastrarPedido)
-                            .addComponent(txtSalvarCadastrarPedido)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCadastrarPedidoNome)
+                            .addComponent(txtCadastrarPedidoEmail)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
+                        .addContainerGap()
+                        .addComponent(txtEditarCadastrarPedidoNomeSubstituicao))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btCadastrarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 157, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(120, 120, 120)
+                                .addComponent(btCriarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btExcluirPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(158, 158, 158)
+                                .addComponent(btEditarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel5)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtCadastrarPedidoEmailEditar, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtCadastrarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSalvarCadastrarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(btCadastrarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCadastrarPedidoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCadastrarPedidoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btCriarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btExcluirPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCadastrarPedidoEmailEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtEditarCadastrarPedidoNomeExistente1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtEditarCadastrarPedidoNomeSubstituicao, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btEditarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCadastrarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCadastrarPedidoActionPerformed
+    private void txtCadastrarPedidoEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCadastrarPedidoEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCadastrarPedidoActionPerformed
-
-    private void btCadastrarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarPedidoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btCadastrarPedidoActionPerformed
+    }//GEN-LAST:event_txtCadastrarPedidoEmailActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
         this.dispose();
-        Cadastro janelaCadastro = new Cadastro();
-        janelaCadastro.setVisible(true);
+        JanelaInicial janelaInicial = new JanelaInicial();
+        janelaInicial.setVisible(true);
     }//GEN-LAST:event_btVoltarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btCriarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCriarPedidoActionPerformed
+        c.CriarPedido();
+    }//GEN-LAST:event_btCriarPedidoActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new CadastrarPedido().setVisible(true));
-    }
+    private void btEditarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarPedidoActionPerformed
+        c.EditarPedido();
+    }//GEN-LAST:event_btEditarPedidoActionPerformed
+
+    private void txtCadastrarPedidoNomeAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtCadastrarPedidoNomeAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCadastrarPedidoNomeAncestorAdded
+
+    private void txtEditarCadastrarPedidoNomeSubstituicaoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtEditarCadastrarPedidoNomeSubstituicaoAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEditarCadastrarPedidoNomeSubstituicaoAncestorAdded
+
+    private void txtEditarCadastrarPedidoNomeExistente1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtEditarCadastrarPedidoNomeExistente1AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEditarCadastrarPedidoNomeExistente1AncestorAdded
+
+    private void btExcluirPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirPedidoActionPerformed
+        c.ExcluirPedido();
+    }//GEN-LAST:event_btExcluirPedidoActionPerformed
+
+    private void txtEditarCadastrarPedidoNomeExistente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEditarCadastrarPedidoNomeExistente1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEditarCadastrarPedidoNomeExistente1ActionPerformed
+
+    private void txtCadastrarPedidoEmailEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCadastrarPedidoEmailEditarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCadastrarPedidoEmailEditarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCadastrarPedido;
+    private javax.swing.JButton btCriarPedido;
+    private javax.swing.JButton btEditarPedido;
+    private javax.swing.JButton btExcluirPedido;
     private javax.swing.JButton btVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField txtCadastrarPedido;
-    private javax.swing.JTextField txtSalvarCadastrarPedido;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtCadastrarPedidoEmail;
+    private javax.swing.JTextField txtCadastrarPedidoEmailEditar;
+    private javax.swing.JTextField txtCadastrarPedidoNome;
+    private javax.swing.JTextField txtEditarCadastrarPedidoNomeExistente1;
+    private javax.swing.JTextField txtEditarCadastrarPedidoNomeSubstituicao;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,7 +8,7 @@ package model;
  *
  * @author paulo
  */
-public class BebidaModel {
+public class BebidaModel implements Imposto_Alcool{
     private String nome;
     private String informacoes;
 

@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import model.BebidaModel;
 import java.sql.Connection;
 
 /**
@@ -185,7 +184,7 @@ public class Bebida extends javax.swing.JFrame {
 
         try (Connection conexao = new Conexao().getConnection()) {
             BebidaDAO bebidaDAO = new BebidaDAO(conexao);
-            BebidaModel bebida = bebidaDAO.buscarPorNome(nomeBebida);
+            model.BebidaModel bebida = bebidaDAO.buscarPorNome(nomeBebida);
 
             if (bebida != null) {
                 jTextArea1.setText(

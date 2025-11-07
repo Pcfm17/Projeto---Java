@@ -4,11 +4,17 @@
  */
 package view;
 
+import controller.ControleCarrinho;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 /**
  *
  * @author paulo
  */
 public class Carrinho extends javax.swing.JFrame {
+    
+    ControleCarrinho c = new ControleCarrinho(this);
     
     /**
      * Creates new form Carrinho
@@ -16,6 +22,32 @@ public class Carrinho extends javax.swing.JFrame {
     public Carrinho() {
         initComponents();
     }
+
+    public JTextArea getTxtCarrinhoLista() {
+        return txtCarrinhoLista;
+    }
+
+    public void setTxtCarrinhoLista(JTextArea txtCarrinhoLista) {
+        this.txtCarrinhoLista = txtCarrinhoLista;
+    }
+
+    public JTextField getTxtCarrinhoPedidoAlimento() {
+        return txtCarrinhoPedidoAlimento;
+    }
+
+    public void setTxtCarrinhoPedidoAlimento(JTextField txtCarrinhoPedidoAlimento) {
+        this.txtCarrinhoPedidoAlimento = txtCarrinhoPedidoAlimento;
+    }
+
+    public JTextField getTxtCarrinhoPedidoEmail() {
+        return txtCarrinhoPedidoEmail;
+    }
+
+    public void setTxtCarrinhoPedidoEmail(JTextField txtCarrinhoPedidoEmail) {
+        this.txtCarrinhoPedidoEmail = txtCarrinhoPedidoEmail;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,6 +59,14 @@ public class Carrinho extends javax.swing.JFrame {
     private void initComponents() {
 
         btVoltar2 = new javax.swing.JButton();
+        btRemoverPedido = new javax.swing.JButton();
+        btAdicionarPedido = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtCarrinhoPedidoEmail = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtCarrinhoPedidoAlimento = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtCarrinhoLista = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -37,21 +77,106 @@ public class Carrinho extends javax.swing.JFrame {
             }
         });
 
+        btRemoverPedido.setText("Remover");
+        btRemoverPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRemoverPedidoActionPerformed(evt);
+            }
+        });
+
+        btAdicionarPedido.setText("Adicionar");
+        btAdicionarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAdicionarPedidoActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        jLabel1.setText("Email");
+
+        txtCarrinhoPedidoEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCarrinhoPedidoEmailActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        jLabel2.setText("Alimento");
+
+        txtCarrinhoPedidoAlimento.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                txtCarrinhoPedidoAlimentoAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        txtCarrinhoLista.setColumns(20);
+        txtCarrinhoLista.setRows(5);
+        txtCarrinhoLista.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                txtCarrinhoListaAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jScrollPane1.setViewportView(txtCarrinhoLista);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(322, Short.MAX_VALUE)
-                .addComponent(btVoltar2)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCarrinhoPedidoEmail)
+                            .addComponent(txtCarrinhoPedidoAlimento))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(btAdicionarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addComponent(btRemoverPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btVoltar2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btVoltar2)
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addComponent(btVoltar2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCarrinhoPedidoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCarrinhoPedidoAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btAdicionarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btRemoverPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -62,7 +187,36 @@ public class Carrinho extends javax.swing.JFrame {
         JanelaInicial janelaInicial = new JanelaInicial();
         janelaInicial.setVisible(true);
     }//GEN-LAST:event_btVoltar2ActionPerformed
+
+    private void btRemoverPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverPedidoActionPerformed
+        c.RemoverPedido();
+    }//GEN-LAST:event_btRemoverPedidoActionPerformed
+
+    private void btAdicionarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarPedidoActionPerformed
+        c.AdicionarPedido();
+    }//GEN-LAST:event_btAdicionarPedidoActionPerformed
+
+    private void txtCarrinhoPedidoEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCarrinhoPedidoEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCarrinhoPedidoEmailActionPerformed
+
+    private void txtCarrinhoPedidoAlimentoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtCarrinhoPedidoAlimentoAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCarrinhoPedidoAlimentoAncestorAdded
+
+    private void txtCarrinhoListaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtCarrinhoListaAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCarrinhoListaAncestorAdded
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAdicionarPedido;
+    private javax.swing.JButton btRemoverPedido;
     private javax.swing.JButton btVoltar2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea txtCarrinhoLista;
+    private javax.swing.JTextField txtCarrinhoPedidoAlimento;
+    private javax.swing.JTextField txtCarrinhoPedidoEmail;
     // End of variables declaration//GEN-END:variables
 }
