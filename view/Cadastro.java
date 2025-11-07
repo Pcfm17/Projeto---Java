@@ -231,6 +231,9 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
         c.salvarAluno();
+        this.dispose();
+        Login janelaLogin = new Login();
+        janelaLogin.setVisible(true);
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btAcesarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAcesarLoginActionPerformed
