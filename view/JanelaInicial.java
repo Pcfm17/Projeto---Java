@@ -29,47 +29,30 @@ public class JanelaInicial extends javax.swing.JFrame {
         btAlimento = new javax.swing.JButton();
         btBebida = new javax.swing.JButton();
         btPesquisa = new javax.swing.JButton();
-        btCarrinho = new javax.swing.JButton();
-        btHistorico = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
-        btAvaliacao = new javax.swing.JButton();
         btCadastrarPedido = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btAlimento.setText("Busca de Alimentos");
+        btAlimento.setText("Pesquisa de Alimentos");
         btAlimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAlimentoActionPerformed(evt);
             }
         });
 
-        btBebida.setText("Busca de Bebidas");
+        btBebida.setText("Pesquisa de Bebidas");
         btBebida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btBebidaActionPerformed(evt);
             }
         });
 
-        btPesquisa.setText("Pesquisa");
+        btPesquisa.setText("Salvando a Pesquisa");
         btPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btPesquisaActionPerformed(evt);
-            }
-        });
-
-        btCarrinho.setText("Carrinho");
-        btCarrinho.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCarrinhoActionPerformed(evt);
-            }
-        });
-
-        btHistorico.setText("Histórico");
-        btHistorico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btHistoricoActionPerformed(evt);
             }
         });
 
@@ -77,13 +60,6 @@ public class JanelaInicial extends javax.swing.JFrame {
         btVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btVoltarActionPerformed(evt);
-            }
-        });
-
-        btAvaliacao.setText("Avaliação");
-        btAvaliacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAvaliacaoActionPerformed(evt);
             }
         });
 
@@ -106,25 +82,20 @@ public class JanelaInicial extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(149, 149, 149))
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btCadastrarPedido)
-                    .addComponent(btAlimento))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btAvaliacao, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btBebida))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btPesquisa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btCarrinho, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addComponent(btHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
-                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btAlimento)
+                            .addComponent(btCadastrarPedido))
+                        .addGap(56, 56, 56)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btPesquisa)
+                            .addComponent(btBebida)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(40, 88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,28 +105,18 @@ public class JanelaInicial extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCadastrarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAvaliacao, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(btPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHistoricoActionPerformed
-        this.dispose();
-        Historico janelaHistorico = new Historico();
-        janelaHistorico.setVisible(true);
-    }//GEN-LAST:event_btHistoricoActionPerformed
 
     private void btAlimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlimentoActionPerformed
         this.dispose();
@@ -175,18 +136,6 @@ public class JanelaInicial extends javax.swing.JFrame {
         janelaPesquisa.setVisible(true);
     }//GEN-LAST:event_btPesquisaActionPerformed
 
-    private void btCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCarrinhoActionPerformed
-        this.dispose();
-        Carrinho janelaCarrinho = new Carrinho();
-        janelaCarrinho.setVisible(true);
-    }//GEN-LAST:event_btCarrinhoActionPerformed
-
-    private void btAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAvaliacaoActionPerformed
-        this.dispose();
-        Avaliacao janelaBebida = new Avaliacao();
-        janelaBebida.setVisible(true);
-    }//GEN-LAST:event_btAvaliacaoActionPerformed
-
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
         this.dispose();
         Cadastro janelaCadastro = new Cadastro();
@@ -201,11 +150,8 @@ public class JanelaInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlimento;
-    private javax.swing.JButton btAvaliacao;
     private javax.swing.JButton btBebida;
     private javax.swing.JButton btCadastrarPedido;
-    private javax.swing.JButton btCarrinho;
-    private javax.swing.JButton btHistorico;
     private javax.swing.JButton btPesquisa;
     private javax.swing.JButton btVoltar;
     private javax.swing.JLabel jLabel1;

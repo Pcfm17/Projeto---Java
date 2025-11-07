@@ -28,30 +28,26 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btCadastrarPedido" min="-2" max="-2" attributes="0"/>
-                  <Component id="btAlimento" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="btAlimento" min="-2" max="-2" attributes="0"/>
+                          <Component id="btCadastrarPedido" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btPesquisa" min="-2" max="-2" attributes="0"/>
+                          <Component id="btBebida" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
+                      <Component id="btVoltar" min="-2" pref="100" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btAvaliacao" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="btBebida" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="19" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btPesquisa" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="btCarrinho" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
-              <Component id="btHistorico" min="-2" pref="100" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-              <Component id="btVoltar" min="-2" pref="100" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="40" pref="88" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -64,20 +60,15 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btBebida" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="btAlimento" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="btPesquisa" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btCadastrarPedido" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="btAvaliacao" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="btCarrinho" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="btPesquisa" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btHistorico" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="btVoltar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="33" max="32767" attributes="0"/>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
+              <Component id="btVoltar" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,7 +76,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btAlimento">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Busca de Alimentos"/>
+        <Property name="text" type="java.lang.String" value="Pesquisa de Alimentos"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAlimentoActionPerformed"/>
@@ -93,7 +84,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btBebida">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Busca de Bebidas"/>
+        <Property name="text" type="java.lang.String" value="Pesquisa de Bebidas"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBebidaActionPerformed"/>
@@ -101,26 +92,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="btPesquisa">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pesquisa"/>
+        <Property name="text" type="java.lang.String" value="Salvando a Pesquisa"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPesquisaActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btCarrinho">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Carrinho"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCarrinhoActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btHistorico">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Hist&#xf3;rico"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btHistoricoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btVoltar">
@@ -129,14 +104,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVoltarActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btAvaliacao">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Avalia&#xe7;&#xe3;o"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAvaliacaoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btCadastrarPedido">
