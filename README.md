@@ -109,8 +109,91 @@ Para não ficar muito repetitivo, nas primeiras linhas tendo as importações pa
     Tem o try que inicia a conexão e a variável que coloca no banco de dados, depois aparece uma menssagem que foi salva com sucesso.
     O cath que é para o erro que seria caso não salve a sua pesquisa.
 
+O arquivo dao:
+1. AlimentoDAO.java :
+   Tem um campo privado e final que guarda referencia para a conexao que está na view (Connection).
+   Tem um campo privado que guarda referencia para a conexao que está na view (Connection).
+   A função buscarPorNome(), que busca pelo alimento no banco de dados e exibe a informação dele.
+   O try que abre a conexão com o banco de dados e ao fechalo tambem o a conexão se fecha.
 
+2. AlunoDAO.java :
+   Tem um campo privado e final que guarda referencia para a conn que está na view (Connection).
+   Tem um campo privado que guarda referencia para a conn que está na view (Connection).
+   A função de inserir(), faz com que o que for cadastrado vai ser salvo no banco de dados da tabela usuario, salvando as 4 variáveis sendo o email, nome, senha, genero.
+   No final dessa função fecha a conexão com o banco de dados.
+   Tem a função verificarLogin() que confere se o email e senha estão corretos e se já existe esse email.
+   O try que abre a conexão com o banco de dados e ao fechalo tambem o a conexão se fecha.
+   O catch que é para se tiver erro irá aparecer uma menssagem de erro de login, tendo o método return para interromper.
+   A função verificarEmailExistente() verifica se já existe o email que está sendo cadastrado e se caso já tiver sido cadastrado irá aparec uma menssagem que já tem esse email cadastrado, mas se não irá para o login para ter o acesso a janela principal, o finally está fechando a conexão com o banco de dados.
+   A função buscarPorEmail() busca por email já existentes tendo uma variável do tipo String sql que é para o pgAdmin.
+   O try para falar se foi encontrado esse email se não irá aparecer o return null, podendo ter o cadastro.
 
+3. AvaliacaoDAO.java :
+   Tem um campo privado que guarda a referência da conexão com o banco de dados (con), utilizada para executar os comandos SQL dentro da classe.
+   Foi criado um construtor que recebe essa conexão e armazena na variável con, permitindo que o DAO tenha acesso ao banco de dados.
+   A função inserir() é responsável por salvar no banco de dados as informações enviadas pelo usuário.
+   Essas informações são: email, descrição e nota (que representa a avaliação de 1 a 5 estrelas).
+   Dentro do método, o comando SQL é preparado e executado usando um PreparedStatement, e no final ele é fechado para liberar os recursos da conexão.
+
+4. BebidaDAO.java :
+   Tem um campo privado e final que guarda referência para a conexao que está na view (Connection).
+   A função buscarPorNome() faz a busca da bebida no banco de dados, procurando pelo nome que o usuário digitou.
+   Tem uma variável do tipo String sql que contém o comando SQL responsável por procurar o nome da bebida na tabela bebidadainformacoes.
+   Dentro do try, é feita a preparação do comando e a execução da consulta.
+   Caso o banco encontre o nome da bebida, ele cria um objeto do tipo BebidaModel, salvando o nome e as informações da bebida encontradas.
+   Se não encontrar nada, retorna null, indicando que não há nenhuma bebida cadastrada com aquele nome.
+
+5. CadastrarPedidoDAO.java :
+   Tem um campo privado que guarda referência para a conexao que está na view (Connection).
+   A função inserir() que é responsável por salvar o pedido feito pelo usuário no banco de dados, guardando o id, o alimento e o preço.
+   A função verificarIdExistente() faz uma verificação no banco para saber se já existe algum pedido com o mesmo id, evitando duplicações.
+   A função buscarPorId() procura um pedido específico no banco de dados usando o id e, caso encontre, retorna o pedido com suas informações completas.
+   A função atualizarPedido() permite modificar o alimento e o preço de um pedido já existente no banco, usando o id como referência.
+   A função excluirPedido() serve para remover um pedido do banco de dados, também usando o id.
+   A função buscarPrecoAlimento() busca o preço de um alimento cadastrado no cardápio, retornando BigDecimal.ZERO caso não encontre.
+   A função verificarAlimentoExiste() verifica se o alimento digitado pelo usuário realmente existe no cardápio antes de tentar usá-lo.
+   A função listarCardapio() retorna todos os alimentos cadastrados no banco, em ordem alfabética, para mostrar o cardápio completo ao usuário.
+
+6. CarrinhoDAO.java :
+   Tem um campo privado que guarda referência para a conn, que é usada para fazer a conexão com o banco de dados.
+   A função adicionarAlimento() é responsável por adicionar um novo alimento a um pedido já existente, atualizando também o preço total no banco de dados.
+   A função buscarPedidoPorId() busca um pedido específico usando o id, retornando todas as informações do pedido se ele existir.
+   A função removerAlimento() serve para retirar um alimento do pedido, atualizando o banco de dados e recalculando o preço total depois da remoção. Ela faz isso verificando o alimento dentro da lista e subtraindo seu valor do preço total.
+   A função calcularTotalComTaxa() soma uma taxa de 10% ao valor total se o pedido tiver bebidas alcoólicas, como cerveja, vinho, vodka ou whisky, retornando o total com a taxa inclusa.
+   A função listarAlimentosPorId() lista todos os alimentos que estão associados a um determinado pedido, separando e organizando para mostrar corretamente.
+   A função verificarIdExistente() verifica se o id informado já está cadastrado no banco de dados, evitando erros de duplicidade ou pedidos inexistentes.
+
+7. Conexao.java :
+   Essa classe é o pilar principal do código, pois é ela que faz a conexão com o banco de dados.
+   Tem três constantes privadas: URL, USER e PASSWORD, que guardam as informações necessárias para se conectar ao PostgreSQL, ou seja, o endereço do banco, o nome do usuário e a senha.
+   A função getConnection() é responsável por criar e retornar a conexão ativa com o banco.
+   Dentro dela, o código primeiro tenta carregar o driver do PostgreSQL (para garantir que o Java consiga se comunicar com o banco).
+   Depois, ele usa o DriverManager para abrir a conexão utilizando as informações fornecidas.
+   Caso o driver não seja encontrado, o sistema lança uma exceção avisando que o driver do PostgreSQL não foi localizado.
+   Essa classe é essencial, pois sem ela nenhuma parte do sistema conseguiria salvar, buscar ou atualizar informações no banco de dados.
+
+8. HistoricoDAO.java :
+   Essa classe é responsável por buscar o histórico de alimentos pesquisados de um usuário com base no seu e-mail.
+   Ela possui o método buscarPorEmail(), que recebe um email como parâmetro e retorna uma lista de objetos HistoricoModel contendo os dados encontrados.
+   Dentro do método, é criada uma lista vazia que será preenchida com os resultados vindos do banco de dados.
+   O código faz a conexão utilizando a classe Conexao, que é o pilar principal de todo o sistema, pois permite a comunicação com o banco.
+   Depois, é preparado um comando SQL que seleciona os campos email e alimento da tabela salvandopesquisa, filtrando pelo e-mail informado.
+   Cada resultado encontrado é transformado em um novo HistoricoModel, que é adicionado à lista.
+   Durante o processo, também há uma verificação de erro: se ocorrer algum problema ao buscar os dados, o sistema mostra uma mensagem de erro no console.
+   No final, a lista com todos os registros é retornada, permitindo que a interface mostre para o usuário todos os alimentos pesquisados por aquele email.
+
+9. PesquisaDAO.java :
+    Essa classe é responsável por gerenciar as pesquisas realizadas pelos usuários, registrando e consultando os alimentos pesquisados no banco de dados.
+    Ela faz parte da camada DAO (Data Access Object), que é responsável pela comunicação direta entre o sistema e o banco.
+    Logo no início, a classe recebe uma conexão com o banco de dados através de seu construtor.
+    Essa conexão, proveniente da classe Conexao, que é o pilar central do sistema, garante que as informações sejam gravadas e recuperadas corretamente no PostgreSQL.
+    O método inserir() tem a função de salvar uma nova pesquisa no banco.
+    Ele cria um comando SQL que insere o e-mail do usuário e o alimento pesquisado na tabela salvandopesquisa.
+    A partir dos dados vindos do objeto PesquisaModel, o método executa o comando e fecha a instrução para evitar vazamentos de recursos.
+    Já o método buscarPorEmail() serve para procurar no banco as pesquisas feitas por um determinado usuário, filtrando pelo e-mail informado.
+    Se o e-mail for encontrado, o método cria um novo objeto PesquisaModel com as informações recuperadas, o email e o alimento pesquisado, e o retorna.
+    Caso contrário, retorna null, indicando que não há registros para aquele e-mail.
+    Com isso, a classe PesquisaDAO permite que o sistema armazene e recupere de forma eficiente as buscas feitas pelos usuários, garantindo a persistência e a consistência dos dados de pesquisa.
 
 
 
