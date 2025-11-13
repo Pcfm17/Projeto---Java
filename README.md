@@ -195,13 +195,52 @@ O arquivo dao:
     Caso contrário, retorna null, indicando que não há registros para aquele e-mail.
     Com isso, a classe PesquisaDAO permite que o sistema armazene e recupere de forma eficiente as buscas feitas pelos usuários, garantindo a persistência e a consistência dos dados de pesquisa.
 
+O arquivo model:
+1. AlimentoModel.java :
+   A classe AlimentoModel representa os dados de um alimento no sistema.
+   Ela possui dois atributos: nome e informações, com seus respectivos getters e setters.
+   É usada para armazenar e transportar informações sobre alimentos entre as partes do sistema, mantendo o código organizado e fácil de entender.
 
+2. Aluno.java :
+   A classe Aluno representa as informações de um aluno dentro do sistema.
+   Ela contém os atributos email, nome, senha e gênero, além de um segundo conjunto de dados usado para avaliações (pedidoId, descrição e nota).
+   A classe também possui construtores, getters e setters para manipular os dados, e um método toString() que facilita a exibição das informações do aluno.
+   É usada principalmente para armazenar e transferir dados de alunos entre as partes do sistema.
 
+3. AvaliacaoModel.java :
+   A classe AvaliacaoModel representa a avaliação feita por um usuário no sistema.
+   Ela possui três atributos principais: emailAvaliacao, descrição e nota, que guardam respectivamente o e-mail do avaliador, o texto da avaliação e a nota atribuída.
+   Conta com um construtor para inicializar os dados e métodos getters para acessá-los.
+   É usada para enviar ou armazenar as informações de avaliação de forma organizada e padronizada.
 
+4. BebidaModel.java :
+   A classe BebidaModel representa uma bebida cadastrada no sistema.
+   Ela possui dois atributos principais: nome e informações, que armazenam o nome da bebida e seus detalhes.
+   A classe implementa a interface Imposto_Alcool, indicando que pode estar relacionada a cálculos de impostos para bebidas alcoólicas.
+   Possui métodos getters e setters para acessar e modificar seus dados de forma controlada.
 
+5. CadastrarPedidoModel :
+   A classe CadastrarPedidoModel representa um pedido feito pelo usuário no sistema.
+   Ela possui três atributos principais: id, alimento e preço, que identificam o pedido, descrevem o item solicitado e armazenam o valor total.
+   Conta com construtores para criar objetos com ou sem valores iniciais e com métodos getters e setters para acessar e alterar os dados do pedido de forma segura e organizada.
 
+6. CarrinhoModel.java :
+   A classe CarrinhoModel representa os itens adicionados ao carrinho de compras de um usuário.
+   Ela possui dois atributos principais: email, que identifica o cliente, e alimento, que indica o produto escolhido.
+   A classe conta com construtores para criar objetos com ou sem valores iniciais, getters e setters para acessar e modificar os dados, e um método toString() que retorna o nome do alimento — facilitando a exibição das informações na interface.
 
+7. HistoricoModel.java :
+   A classe HistoricoModel representa o histórico de pesquisas ou pedidos de um usuário.
+   Ela contém dois atributos: email, que identifica o cliente, e alimento, que registra o item pesquisado ou pedido.
+   A classe possui um construtor para inicializar os dados e getters para acessar as informações, sendo usada principalmente para exibir ou armazenar o histórico do usuário no sistema.
 
+8. interface Imposto_Alcool :
+   Ligado a bebida para comprir o requisito.
+
+9. PesquisaModel.java :
+    A classe PesquisaModel representa uma pesquisa feita por um usuário no sistema.
+   Ela possui dois atributos principais: email, que identifica o usuário que realizou a pesquisa, e alimento, que guarda o nome do item pesquisado.
+   A classe conta com um construtor para inicializar os dados e métodos getters para acessar essas informações, servindo como modelo para registrar e recuperar pesquisas realizadas no banco de dados. 
 
 
 
