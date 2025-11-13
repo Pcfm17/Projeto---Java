@@ -11,8 +11,6 @@ import view.Cadastro;
 public class ControleCadastro {
     private Cadastro tela3;
 
-    // REMOVIDA A LINHA COM ERRO: // ControleCadastro c = new ControleCadastro(this);
-
     public ControleCadastro(Cadastro tela3){
         this.tela3 = tela3;
     }
