@@ -1,22 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
 import dao.CarrinhoDAO;
+import dao.CadastrarPedidoDAO;
 import dao.Conexao;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JOptionPane;
+import model.CadastrarPedidoModel;
 import model.CarrinhoModel;
 import view.Carrinho;
 
-/**
- *
- * @author paulo
- */
 public class ControleCarrinho {
     private Carrinho telaCarrinho;
 
@@ -25,84 +20,79 @@ public class ControleCarrinho {
     }
 
     public void AdicionarPedido() {
-        String email = telaCarrinho.getTxtCarrinhoPedidoEmail().getText().trim();
+        String idPedido = telaCarrinho.getTxtCarrinhoPedidoID().getText().trim();
         String alimento = telaCarrinho.getTxtCarrinhoPedidoAlimento().getText().trim();
 
-        if (email.isEmpty() || alimento.isEmpty()) {
-            JOptionPane.showMessageDialog(telaCarrinho, "Todos os campos devem "
-                    + "ser preenchidos.", "Atenção",
-                    JOptionPane.WARNING_MESSAGE);
+        if (idPedido.isEmpty() || alimento.isEmpty()) {
+            JOptionPane.showMessageDialog(telaCarrinho, "ID e Alimento devem ser preenchidos.", "Atenção", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        Connection conn = null;
-        try {
-            Conexao conexao = new Conexao();
-            conn = conexao.getConnection();
-            CarrinhoDAO dao = new CarrinhoDAO(conn);
+        try (Connection conexaoBanco = new Conexao().getConnection()) {
+            CarrinhoDAO carrinhoDAO = new CarrinhoDAO(conexaoBanco);
+            CadastrarPedidoDAO pedidoDAO = new CadastrarPedidoDAO(conexaoBanco);
             
-            // Verifica se o pedido existe, se não existir cria um vazio
-            if (!dao.verificarEmailExistente(email)) {
-                int resposta = JOptionPane.showConfirmDialog(telaCarrinho, 
-                    "Email não encontrado. Deseja criar um novo pedido para este email?",
-                    "Pedido Não Encontrado",
-                    JOptionPane.YES_NO_OPTION);
-                
-                if (resposta == JOptionPane.YES_OPTION) {
-                    dao.criarPedidoSeNaoExistir(email);
-                } else {
-                    return;
-                }
-            }
-            
-            CarrinhoModel item = new CarrinhoModel(email, alimento);
-            dao.adicionarAlimento(item);
-            
-            JOptionPane.showMessageDialog(telaCarrinho, 
-                    "Alimento adicionado ao pedido com sucesso!", 
-                    "Sucesso", 
-                    JOptionPane.INFORMATION_MESSAGE);
-            
-            atualizarListaCarrinho(email);
-            limparCampoAlimento();
-            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(telaCarrinho, "Erro ao adicionar "
-                    + "alimento: " + ex.getMessage(), "Erro", 
-                    JOptionPane.ERROR_MESSAGE);
-        } finally {
-            fecharConexao(conn);
-        }
-    }
-
-    public void RemoverPedido() {
-        String email = telaCarrinho.getTxtCarrinhoPedidoEmail().getText().trim();
-        String alimento = telaCarrinho.getTxtCarrinhoPedidoAlimento().getText().trim();
-
-        if (email.isEmpty() || alimento.isEmpty()) {
-            JOptionPane.showMessageDialog(telaCarrinho, "Todos os campos "
-                    + "devem ser preenchidos.", "Atenção",
-                    JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        Connection conn = null;
-        try {
-            Conexao conexao = new Conexao();
-            conn = conexao.getConnection();
-            CarrinhoDAO dao = new CarrinhoDAO(conn);
-            
-            // Verifica se o pedido existe
-            if (!dao.verificarEmailExistente(email)) {
+            if (!carrinhoDAO.verificarIdExistente(idPedido)) {
                 JOptionPane.showMessageDialog(telaCarrinho, 
-                    "Email não encontrado nos pedidos.", 
-                    "Erro", 
+                    "Pedido não encontrado. Crie o pedido primeiro na tela de Cadastro.",
+                    "Pedido Não Encontrado",
                     JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
-            // Verifica se o alimento existe no pedido
-            if (!dao.verificarAlimentoExistente(email, alimento)) {
+            if (!pedidoDAO.verificarAlimentoExiste(alimento)) {
+                mostrarCardapioCompleto(pedidoDAO.listarCardapio());
+                return;
+            }
+            
+            BigDecimal precoAlimento = pedidoDAO.buscarPrecoAlimento(alimento);
+            carrinhoDAO.adicionarAlimento(idPedido, alimento, precoAlimento);
+            
+            BigDecimal totalComTaxa = carrinhoDAO.calcularTotalComTaxa(idPedido);
+            
+            JOptionPane.showMessageDialog(telaCarrinho, 
+                    "Alimento adicionado com sucesso!\n" +
+                    "Subtotal: R$ " + carrinhoDAO.buscarPedidoPorId(idPedido).getPreco() + "\n" +
+                    "Total com taxas: R$ " + totalComTaxa, 
+                    "Sucesso", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            
+            atualizarListaCarrinho(idPedido);
+            limparCampoAlimento();
+            
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(telaCarrinho, "Erro ao adicionar alimento: " + erro.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void RemoverPedido() {
+        String idPedido = telaCarrinho.getTxtCarrinhoPedidoID().getText().trim();
+        String alimento = telaCarrinho.getTxtCarrinhoPedidoAlimento().getText().trim();
+
+        if (idPedido.isEmpty() || alimento.isEmpty()) {
+            JOptionPane.showMessageDialog(telaCarrinho, "ID e Alimento devem ser preenchidos.", "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try (Connection conexaoBanco = new Conexao().getConnection()) {
+            CarrinhoDAO carrinhoDAO = new CarrinhoDAO(conexaoBanco);
+            CadastrarPedidoDAO pedidoDAO = new CadastrarPedidoDAO(conexaoBanco);
+            
+            if (!carrinhoDAO.verificarIdExistente(idPedido)) {
+                JOptionPane.showMessageDialog(telaCarrinho, "Pedido não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            List<CarrinhoModel> alimentos = carrinhoDAO.listarAlimentosPorId(idPedido);
+            boolean alimentoEncontrado = false;
+            for (CarrinhoModel item : alimentos) {
+                if (item.getAlimento().equalsIgnoreCase(alimento.trim())) {
+                    alimentoEncontrado = true;
+                    break;
+                }
+            }
+            
+            if (!alimentoEncontrado) {
                 JOptionPane.showMessageDialog(telaCarrinho, 
                     "Alimento não encontrado no pedido.", 
                     "Erro", 
@@ -110,68 +100,65 @@ public class ControleCarrinho {
                 return;
             }
             
-            dao.removerAlimento(email, alimento);
+            carrinhoDAO.removerAlimento(idPedido, alimento);
+            BigDecimal totalComTaxa = carrinhoDAO.calcularTotalComTaxa(idPedido);
             
             JOptionPane.showMessageDialog(telaCarrinho, 
-                    "Alimento removido do pedido com sucesso!", 
+                    "Alimento removido com sucesso!\n" +
+                    "Total atual com taxas: R$ " + totalComTaxa, 
                     "Sucesso", 
                     JOptionPane.INFORMATION_MESSAGE);
             
-            atualizarListaCarrinho(email);
+            atualizarListaCarrinho(idPedido);
             limparCampoAlimento();
             
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(telaCarrinho, "Erro ao remover "
-                    + "alimento: " + ex.getMessage(), "Erro",
-                    JOptionPane.ERROR_MESSAGE);
-        } finally {
-            fecharConexao(conn);
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(telaCarrinho, "Erro ao remover alimento: " + erro.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
     
-    public void atualizarListaCarrinho(String email) {
-        if (email == null || email.isEmpty()) {
-            telaCarrinho.getTxtCarrinhoLista().setText("Digite um email para "
-                    + "visualizar o pedido");
+    public void atualizarListaCarrinho(String idPedido) {
+        if (idPedido == null || idPedido.isEmpty()) {
+            telaCarrinho.getTxtCarrinhoLista().setText("Digite um ID para visualizar o pedido");
             return;
         }
         
-        Connection conn = null;
-        try {
-            Conexao conexao = new Conexao();
-            conn = conexao.getConnection();
-            CarrinhoDAO dao = new CarrinhoDAO(conn);
+        try (Connection conexaoBanco = new Conexao().getConnection()) {
+            CarrinhoDAO carrinhoDAO = new CarrinhoDAO(conexaoBanco);
             
-            // Verifica se o pedido existe
-            if (!dao.verificarEmailExistente(email)) {
-                telaCarrinho.getTxtCarrinhoLista().setText("Nenhum pedido "
-                        + "encontrado para: " + email);
+            if (!carrinhoDAO.verificarIdExistente(idPedido)) {
+                telaCarrinho.getTxtCarrinhoLista().setText("Nenhum pedido encontrado para ID: " + idPedido);
                 return;
             }
             
-            List<CarrinhoModel> alimentos = dao.listarAlimentosPorEmail(email);
-            String pedidoCompleto = dao.buscarPedidoPorEmail(email);
+            List<CarrinhoModel> alimentos = carrinhoDAO.listarAlimentosPorId(idPedido);
+            BigDecimal totalComTaxa = carrinhoDAO.calcularTotalComTaxa(idPedido);
+            CadastrarPedidoModel pedido = carrinhoDAO.buscarPedidoPorId(idPedido);
             
-            StringBuilder lista = new StringBuilder();
-            lista.append("Pedido para: ").append(email).append("\n\n");
+            StringBuilder textoLista = new StringBuilder();
+            textoLista.append("=== PEDIDO ID: ").append(idPedido).append(" ===\n\n");
             
-            if (alimentos.isEmpty() || (pedidoCompleto != null && pedidoCompleto.trim().isEmpty())) {
-                lista.append("Pedido vazio\n");
+            if (alimentos.isEmpty()) {
+                textoLista.append("Pedido vazio\n");
             } else {
-                lista.append("Itens no pedido:\n");
-                for (int i = 0; i < alimentos.size(); i++) {
-                    lista.append(i + 1).append(". ").append(alimentos.get(i).getAlimento()).append("\n");
+                textoLista.append("ITENS NO PEDIDO:\n");
+                for (int indice = 0; indice < alimentos.size(); indice++) {
+                    textoLista.append(indice + 1).append(". ").append(alimentos.get(indice).getAlimento()).append("\n");
                 }
-                lista.append("\nPedido completo: ").append(pedidoCompleto);
             }
             
-            telaCarrinho.getTxtCarrinhoLista().setText(lista.toString());
+            textoLista.append("\n=== RESUMO DO PEDIDO ===\n");
+            textoLista.append("Subtotal: R$ ").append(pedido.getPreco()).append("\n");
+            textoLista.append("Total com taxas: R$ ").append(totalComTaxa).append("\n");
             
-        } catch (SQLException ex) {
-            telaCarrinho.getTxtCarrinhoLista().setText("Erro ao carregar "
-                    + "pedido: " + ex.getMessage());
-        } finally {
-            fecharConexao(conn);
+            if (totalComTaxa.compareTo(pedido.getPreco()) > 0) {
+                textoLista.append("\n⚠️  Inclui taxa de 10% para bebidas alcoólicas");
+            }
+            
+            telaCarrinho.getTxtCarrinhoLista().setText(textoLista.toString());
+            
+        } catch (SQLException erro) {
+            telaCarrinho.getTxtCarrinhoLista().setText("Erro ao carregar pedido: " + erro.getMessage());
         }
     }
 
@@ -179,13 +166,69 @@ public class ControleCarrinho {
         telaCarrinho.getTxtCarrinhoPedidoAlimento().setText("");
     }
 
-    private void fecharConexao(Connection conn) {
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                System.err.println("Erro ao fechar conexão: " + e.getMessage());
+    private void mostrarCardapioCompleto(java.util.List<String> cardapio) {
+        StringBuilder mensagemCardapio = new StringBuilder();
+        mensagemCardapio.append("Alimento não encontrado no cardápio!\n\n");
+        mensagemCardapio.append("CARDÁPIO DISPONÍVEL:\n");
+        
+        for (int indice = 0; indice < cardapio.size(); indice++) {
+            mensagemCardapio.append("• ").append(cardapio.get(indice)).append("\n");
+            if ((indice + 1) % 5 == 0) {
+                mensagemCardapio.append("\n");
             }
         }
+        
+        javax.swing.JTextArea areaTextoCardapio = new javax.swing.JTextArea(mensagemCardapio.toString());
+        areaTextoCardapio.setEditable(false);
+        areaTextoCardapio.setLineWrap(true);
+        areaTextoCardapio.setWrapStyleWord(true);
+        areaTextoCardapio.setBackground(new java.awt.Color(240, 240, 240));
+        
+        javax.swing.JScrollPane painelRolagemCardapio = new javax.swing.JScrollPane(areaTextoCardapio);
+        painelRolagemCardapio.setPreferredSize(new java.awt.Dimension(400, 250));
+        
+        JOptionPane.showMessageDialog(telaCarrinho, painelRolagemCardapio, 
+                                    "Cardápio - Alimentos Disponíveis", 
+                                    JOptionPane.ERROR_MESSAGE);
     }
+    
+    public void pesquisarPedidoPorID() {
+        String idPedido = telaCarrinho.getTxtCarrinhoPedidoID().getText().trim();
+        
+        if (idPedido.isEmpty()) {
+            telaCarrinho.getTxtCarrinhoLista().setText("Digite um ID para pesquisar!");
+            return;
+        }
+        
+        try (Connection conexaoBanco = new Conexao().getConnection()) {
+            CarrinhoDAO carrinhoDAO = new CarrinhoDAO(conexaoBanco);
+            
+            if (!carrinhoDAO.verificarIdExistente(idPedido)) {
+                telaCarrinho.getTxtCarrinhoLista().setText("Nenhum pedido encontrado para ID: " + idPedido);
+                return;
+            }
+            
+            List<CarrinhoModel> alimentos = carrinhoDAO.listarAlimentosPorId(idPedido);
+            BigDecimal totalComTaxa = carrinhoDAO.calcularTotalComTaxa(idPedido);
+            
+            StringBuilder resultado = new StringBuilder();
+            resultado.append("=== PEDIDOS DO ID: ").append(idPedido).append(" ===\n\n");
+            
+            if (alimentos.isEmpty()) {
+                resultado.append("Nenhum alimento encontrado neste pedido.");
+            } else {
+                resultado.append("ITENS NO CARRINHO:\n");
+                for (int i = 0; i < alimentos.size(); i++) {
+                    resultado.append(i + 1).append(". ").append(alimentos.get(i).getAlimento()).append("\n");
+                }
+                
+                resultado.append("\nTotal com taxas: R$ ").append(totalComTaxa);
+            }
+            
+            telaCarrinho.getTxtCarrinhoLista().setText(resultado.toString());
+            
+        } catch (SQLException erro) {
+            telaCarrinho.getTxtCarrinhoLista().setText("Erro ao pesquisar pedido: " + erro.getMessage());
+        }
+    }   
 }

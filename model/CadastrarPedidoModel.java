@@ -1,35 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author paulo
- */
-public class CadastrarPedidoModel {
-    private String email;
-    private String nome;
+import java.math.BigDecimal;
 
-    // Construtor vazio adicionado
+public class CadastrarPedidoModel {
+    private String id;
+    private String alimento;
+    private BigDecimal preco;
+    
     public CadastrarPedidoModel() {
     }
-
-    public CadastrarPedidoModel(String email, String nome) {
-        this.email = email;
-        this.nome = nome;
-    }
-
-    public String getEmail() { return email;}
-    public String getNome() { return nome; }
-
-    public void setEmail(String email) { this.email = email; }
-    public void setNome(String nome) { this.nome = nome; }
-
-    @Override
-    public String toString() {
-        return "CadastrarPedidoModel{" + "email=" + email + ", nome=" + nome + '}';
-    }
     
+    public CadastrarPedidoModel(String id, String alimento, BigDecimal preco) {
+        this.id = id;
+        this.alimento = alimento;
+        this.preco = preco;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getAlimento() {
+        return alimento;
+    }
+
+    public void setAlimento(String alimento) {
+        this.alimento = alimento;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
 }

@@ -1,128 +1,138 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
 import dao.CadastrarPedidoDAO;
 import dao.Conexao;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.math.BigDecimal;
 import javax.swing.JOptionPane;
 import model.CadastrarPedidoModel;
 import view.CadastrarPedido;
 
-/**
- *
- * @author paulo
- */
 public class ControleCadastrarPedido {
-    private CadastrarPedido tela3;
+    private CadastrarPedido telaCadastrarPedido;
 
-    public ControleCadastrarPedido(CadastrarPedido tela3){
-        this.tela3 = tela3;
+    public ControleCadastrarPedido(CadastrarPedido telaCadastrarPedido){
+        this.telaCadastrarPedido = telaCadastrarPedido;
     }
 
     public void CriarPedido(){
-        String email = tela3.getTxtCadastrarPedidoEmail().getText().trim();
-        String nome = tela3.getTxtCadastrarPedidoNome().getText().trim();
+        String id = telaCadastrarPedido.getTxtCadastrarPedidoId().getText().trim();
+        String alimento = telaCadastrarPedido.getTxtCadastrarPedidoNome().getText().trim();
 
-        if (email.isEmpty() || nome.isEmpty()) {
-            JOptionPane.showMessageDialog(tela3, "Todos os campos devem ser preenchidos.", "Atenção", JOptionPane.WARNING_MESSAGE);
+        if (id.isEmpty() || alimento.isEmpty()) {
+            JOptionPane.showMessageDialog(telaCadastrarPedido, "ID e Alimento devem ser preenchidos.", "Atenção", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        Connection conn = null;
-        try {
-            Conexao conexao = new Conexao();
-            conn = conexao.getConnection();
-            CadastrarPedidoDAO dao = new CadastrarPedidoDAO(conn);
+        try (Connection conexaoBanco = new Conexao().getConnection()) {
+            CadastrarPedidoDAO pedidoDAO = new CadastrarPedidoDAO(conexaoBanco);
             
-            if (dao.verificarEmailExistente(email)) {
-                JOptionPane.showMessageDialog(tela3, 
-                    "Este e-mail já está com um pedido. Por favor, utilize outro.", 
-                    "Email Duplicado", 
-                    JOptionPane.ERROR_MESSAGE);
+            if (pedidoDAO.verificarIdExistente(id)) {
+                JOptionPane.showMessageDialog(telaCadastrarPedido, "Este ID já existe. Por favor, use um ID diferente.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
-            CadastrarPedidoModel pedido = new CadastrarPedidoModel(email, nome);
-            dao.inserir(pedido);
+            if (!pedidoDAO.verificarAlimentoExiste(alimento)) {
+                mostrarCardapioCompleto(pedidoDAO.listarCardapio());
+                return;
+            }
             
-            JOptionPane.showMessageDialog(tela3, 
-                    "Pedido cadastrado com sucesso!", 
+            BigDecimal precoAlimento = pedidoDAO.buscarPrecoAlimento(alimento);
+            CadastrarPedidoModel pedido = new CadastrarPedidoModel(id, alimento, precoAlimento);
+            pedidoDAO.inserir(pedido);
+            
+            JOptionPane.showMessageDialog(telaCadastrarPedido, 
+                    "Pedido criado com sucesso!\nID: " + id + 
+                    "\nAlimento: " + alimento + 
+                    "\nPreço: R$ " + precoAlimento, 
                     "Sucesso", 
                     JOptionPane.INFORMATION_MESSAGE);
             
             limparCampos();
             
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(tela3, "Erro ao cadastrar pedido: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            fecharConexao(conn);
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(telaCadastrarPedido, "Erro ao criar pedido: " + erro.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public void EditarPedido(){
-        String emailExistente = tela3.getTxtCadastrarPedidoEmailEditar().getText().trim(); // AGORA USA O NOVO CAMPO
-        String itemAntigo = tela3.getTxtEditarCadastrarPedidoNomeExistente1().getText().trim();
-        String itemNovo = tela3.getTxtEditarCadastrarPedidoNomeSubstituicao().getText().trim();
-
-        if (emailExistente.isEmpty() || itemAntigo.isEmpty() || itemNovo.isEmpty()) {
-            JOptionPane.showMessageDialog(tela3, "Todos os campos de edição devem ser preenchidos.", "Atenção", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        Connection conn = null;
         try {
-            Conexao conexao = new Conexao();
-            conn = conexao.getConnection();
-            CadastrarPedidoDAO dao = new CadastrarPedidoDAO(conn);
-            
-            if (!dao.verificarEmailExistente(emailExistente)) {
-                JOptionPane.showMessageDialog(tela3, 
-                    "E-mail não encontrado para edição.", 
-                    "Erro", 
-                    JOptionPane.ERROR_MESSAGE);
+            // CORREÇÃO: Usar o campo específico para edição
+            String id = telaCadastrarPedido.getTxtCadastrarPedidoIDEditar().getText().trim();
+            String alimentoAntigo = telaCadastrarPedido.getTxtEditarCadastrarPedidoNomeExistente1().getText().trim();
+            String alimentoNovo = telaCadastrarPedido.getTxtEditarCadastrarPedidoNomeSubstituicao().getText().trim();
+
+            if (id.isEmpty() || alimentoAntigo.isEmpty() || alimentoNovo.isEmpty()) {
+                JOptionPane.showMessageDialog(telaCadastrarPedido, "Todos os campos de edição devem ser preenchidos.", "Atenção", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
-            // Busca o pedido atual para verificar se o item antigo coincide
-            CadastrarPedidoModel pedidoAtual = dao.buscarPorEmail(emailExistente);
-            if (pedidoAtual != null && !pedidoAtual.getNome().equals(itemAntigo)) {
-                JOptionPane.showMessageDialog(tela3, 
-                    "O item antigo não coincide com o pedido atual.", 
-                    "Erro", 
-                    JOptionPane.ERROR_MESSAGE);
-                return;
+
+            try (Connection conexaoBanco = new Conexao().getConnection()) {
+                CadastrarPedidoDAO pedidoDAO = new CadastrarPedidoDAO(conexaoBanco);
+
+                // VERIFICAÇÃO ALTERNATIVA se buscarPorId ainda der problema
+                if (!pedidoDAO.verificarIdExistente(id)) {
+                    JOptionPane.showMessageDialog(telaCadastrarPedido, "Pedido não encontrado com este ID.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Buscar o pedido atual para verificar o alimento antigo
+                // Método alternativo se buscarPorId não funcionar
+                String comandoSQL = "SELECT alimento FROM pedidos WHERE id = ?";
+                try (java.sql.PreparedStatement stmt = conexaoBanco.prepareStatement(comandoSQL)) {
+                    stmt.setString(1, id);
+                    java.sql.ResultSet rs = stmt.executeQuery();
+                    if (rs.next()) {
+                        String alimentoAtualNoBanco = rs.getString("alimento");
+
+                        if (!alimentoAtualNoBanco.equals(alimentoAntigo)) {
+                            JOptionPane.showMessageDialog(telaCadastrarPedido, 
+                                "O alimento antigo não coincide com o pedido atual.\n" +
+                                "Alimento no pedido: " + alimentoAtualNoBanco + "\n" +
+                                "Alimento informado: " + alimentoAntigo, 
+                                "Erro", 
+                                JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                    }
+                }
+
+                if (!pedidoDAO.verificarAlimentoExiste(alimentoNovo)) {
+                    mostrarCardapioCompleto(pedidoDAO.listarCardapio());
+                    return;
+                }
+
+                BigDecimal novoPreco = pedidoDAO.buscarPrecoAlimento(alimentoNovo);
+                pedidoDAO.atualizarPedido(id, alimentoNovo, novoPreco);
+
+                JOptionPane.showMessageDialog(telaCadastrarPedido, 
+                        "Pedido editado com sucesso!\nID: " + id +
+                        "\nNovo alimento: " + alimentoNovo + 
+                        "\nNovo preço: R$ " + novoPreco, 
+                        "Sucesso", 
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                limparCamposEdicao();
+
+            } catch (SQLException erro) {
+                JOptionPane.showMessageDialog(telaCadastrarPedido, "Erro ao editar pedido: " + erro.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
-            
-            dao.atualizarPedido(emailExistente, itemNovo);
-            
-            JOptionPane.showMessageDialog(tela3, 
-                    "Pedido editado com sucesso!", 
-                    "Sucesso", 
-                    JOptionPane.INFORMATION_MESSAGE);
-            
-            limparCamposEdicao();
-            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(tela3, "Erro ao editar pedido: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            fecharConexao(conn);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(telaCadastrarPedido, "Erro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public void ExcluirPedido(){
-        String email = tela3.getTxtCadastrarPedidoEmail().getText().trim();
+        String id = telaCadastrarPedido.getTxtCadastrarPedidoId().getText().trim();
 
-        if (email.isEmpty()) {
-            JOptionPane.showMessageDialog(tela3, "Informe o email do pedido a ser excluído.", "Atenção", JOptionPane.WARNING_MESSAGE);
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(telaCadastrarPedido, "Informe o ID do pedido a ser excluído.", "Atenção", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        int confirmacao = JOptionPane.showConfirmDialog(tela3, 
-            "Tem certeza que deseja excluir o pedido do email: " + email + "?",
+        int confirmacao = JOptionPane.showConfirmDialog(telaCadastrarPedido, 
+            "Tem certeza que deseja excluir o pedido com ID: " + id + "?",
             "Confirmação de Exclusão",
             JOptionPane.YES_NO_OPTION);
 
@@ -130,54 +140,65 @@ public class ControleCadastrarPedido {
             return;
         }
 
-        Connection conn = null;
-        try {
-            Conexao conexao = new Conexao();
-            conn = conexao.getConnection();
-            CadastrarPedidoDAO dao = new CadastrarPedidoDAO(conn);
+        try (Connection conexaoBanco = new Conexao().getConnection()) {
+            CadastrarPedidoDAO pedidoDAO = new CadastrarPedidoDAO(conexaoBanco);
             
-            if (!dao.verificarEmailExistente(email)) {
-                JOptionPane.showMessageDialog(tela3, 
-                    "E-mail não encontrado para exclusão.", 
+            if (!pedidoDAO.verificarIdExistente(id)) {
+                JOptionPane.showMessageDialog(telaCadastrarPedido, 
+                    "ID não encontrado para exclusão.", 
                     "Erro", 
                     JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
-            dao.excluirPedido(email);
+            pedidoDAO.excluirPedido(id);
             
-            JOptionPane.showMessageDialog(tela3, 
+            JOptionPane.showMessageDialog(telaCadastrarPedido, 
                     "Pedido excluído com sucesso!", 
                     "Sucesso", 
                     JOptionPane.INFORMATION_MESSAGE);
             
             limparCampos();
             
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(tela3, "Erro ao excluir pedido: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            fecharConexao(conn);
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(telaCadastrarPedido, "Erro ao excluir pedido: " + erro.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void limparCampos() {
-        tela3.getTxtCadastrarPedidoEmail().setText("");
-        tela3.getTxtCadastrarPedidoNome().setText("");
+        telaCadastrarPedido.getTxtCadastrarPedidoId().setText("");
+        telaCadastrarPedido.getTxtCadastrarPedidoNome().setText("");
     }
 
     private void limparCamposEdicao() {
-        tela3.getTxtCadastrarPedidoEmailEditar().setText("");
-        tela3.getTxtEditarCadastrarPedidoNomeExistente1().setText("");
-        tela3.getTxtEditarCadastrarPedidoNomeSubstituicao().setText("");
+        telaCadastrarPedido.getTxtCadastrarPedidoIDEditar().setText("");
+        telaCadastrarPedido.getTxtEditarCadastrarPedidoNomeExistente1().setText("");
+        telaCadastrarPedido.getTxtEditarCadastrarPedidoNomeSubstituicao().setText("");
     }
 
-    private void fecharConexao(Connection conn) {
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                System.err.println("Erro ao fechar conexão: " + e.getMessage());
+    private void mostrarCardapioCompleto(java.util.List<String> cardapio) {
+        StringBuilder mensagemCardapio = new StringBuilder();
+        mensagemCardapio.append("Alimento não encontrado no cardápio!\n\n");
+        mensagemCardapio.append("CARDÁPIO DISPONÍVEL:\n");
+        
+        for (int indice = 0; indice < cardapio.size(); indice++) {
+            mensagemCardapio.append("• ").append(cardapio.get(indice)).append("\n");
+            if ((indice + 1) % 5 == 0) {
+                mensagemCardapio.append("\n");
             }
         }
+        
+        javax.swing.JTextArea areaTextoCardapio = new javax.swing.JTextArea(mensagemCardapio.toString());
+        areaTextoCardapio.setEditable(false);
+        areaTextoCardapio.setLineWrap(true);
+        areaTextoCardapio.setWrapStyleWord(true);
+        areaTextoCardapio.setBackground(new java.awt.Color(240, 240, 240));
+        
+        javax.swing.JScrollPane painelRolagemCardapio = new javax.swing.JScrollPane(areaTextoCardapio);
+        painelRolagemCardapio.setPreferredSize(new java.awt.Dimension(400, 250));
+        
+        JOptionPane.showMessageDialog(telaCadastrarPedido, painelRolagemCardapio, 
+                                    "Cardápio - Alimentos Disponíveis", 
+                                    JOptionPane.ERROR_MESSAGE);
     }
 }

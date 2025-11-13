@@ -1,102 +1,103 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import model.CadastrarPedidoModel;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.math.BigDecimal;
 
-/**
- *
- * @author paulo
- */
 public class CadastrarPedidoDAO {
-    private Connection conn;
+    private Connection conexao;
 
-    public CadastrarPedidoDAO(Connection conn) {
-        this.conn = conn;
+    public CadastrarPedidoDAO(Connection conexao) {
+        this.conexao = conexao;
     }
     
-    public void inserir(CadastrarPedidoModel cadastrarPedidoModel) throws SQLException {
-        String sql = "INSERT INTO pedidos (email, nome) VALUES (?, ?)";
-        PreparedStatement stmt = null;
-        try {
-            stmt = conn.prepareStatement(sql);
-            stmt.setString(1, cadastrarPedidoModel.getEmail());
-            stmt.setString(2, cadastrarPedidoModel.getNome());
-            stmt.executeUpdate();
-        } finally {
-            if (stmt != null) {
-                stmt.close();
-            }
+    public void inserir(CadastrarPedidoModel pedido) throws SQLException {
+        String comandoSQL = "INSERT INTO pedidos (id, alimento, preco) VALUES (?, ?, ?)";
+        try (PreparedStatement declaracaoPreparada = conexao.prepareStatement(comandoSQL)) {
+            declaracaoPreparada.setString(1, pedido.getId());
+            declaracaoPreparada.setString(2, pedido.getAlimento());
+            declaracaoPreparada.setBigDecimal(3, pedido.getPreco());
+            declaracaoPreparada.executeUpdate();
         }
     }
     
-    public boolean verificarEmailExistente(String email) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM pedidos WHERE email = ?";
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        try {
-            stmt = conn.prepareStatement(sql);
-            stmt.setString(1, email);
-            rs = stmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
-            }
-            return false;
-        } finally {
-            if (rs != null) rs.close();
-            if (stmt != null) stmt.close();
+    public boolean verificarIdExistente(String id) throws SQLException {
+        String comandoSQL = "SELECT COUNT(*) FROM pedidos WHERE id = ?";
+        try (PreparedStatement declaracaoPreparada = conexao.prepareStatement(comandoSQL)) {
+            declaracaoPreparada.setString(1, id);
+            ResultSet resultadoConsulta = declaracaoPreparada.executeQuery();
+            return resultadoConsulta.next() && resultadoConsulta.getInt(1) > 0;
         }
     }
     
-    public CadastrarPedidoModel buscarPorEmail(String email) throws SQLException {
-        String sql = "SELECT * FROM pedidos WHERE email = ?";
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        try {
-            stmt = conn.prepareStatement(sql);
-            stmt.setString(1, email);
-            rs = stmt.executeQuery();
+    // Método para buscar pedido por ID
+    public CadastrarPedidoModel buscarPorId(String id) throws SQLException {
+        String sql = "SELECT * FROM pedidos WHERE id = ?";
+        try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            stmt.setString(1, id);
+            ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return new CadastrarPedidoModel(
-                    rs.getString("email"),
-                    rs.getString("nome")
-                );
+                CadastrarPedidoModel pedido = new CadastrarPedidoModel();
+                pedido.setId(rs.getString("id"));
+                pedido.setAlimento(rs.getString("alimento"));
+                pedido.setPreco(rs.getBigDecimal("preco"));
+                return pedido;
             }
             return null;
-        } finally {
-            if (rs != null) rs.close();
-            if (stmt != null) stmt.close();
         }
     }
     
-    public void atualizarPedido(String emailAntigo, String novoNome) throws SQLException {
-        String sql = "UPDATE pedidos SET nome = ? WHERE email = ?";
-        PreparedStatement stmt = null;
-        try {
-            stmt = conn.prepareStatement(sql);
-            stmt.setString(1, novoNome);
-            stmt.setString(2, emailAntigo);
-            stmt.executeUpdate();
-        } finally {
-            if (stmt != null) stmt.close();
+    public void atualizarPedido(String id, String novoAlimento, BigDecimal novoPreco) throws SQLException {
+        String comandoSQL = "UPDATE pedidos SET alimento = ?, preco = ? WHERE id = ?";
+        try (PreparedStatement declaracaoPreparada = conexao.prepareStatement(comandoSQL)) {
+            declaracaoPreparada.setString(1, novoAlimento);
+            declaracaoPreparada.setBigDecimal(2, novoPreco);
+            declaracaoPreparada.setString(3, id);
+            declaracaoPreparada.executeUpdate();
         }
     }
     
-    public void excluirPedido(String email) throws SQLException {
-        String sql = "DELETE FROM pedidos WHERE email = ?";
-        PreparedStatement stmt = null;
-        try {
-            stmt = conn.prepareStatement(sql);
-            stmt.setString(1, email);
-            stmt.executeUpdate();
-        } finally {
-            if (stmt != null) stmt.close();
+    public void excluirPedido(String id) throws SQLException {
+        String comandoSQL = "DELETE FROM pedidos WHERE id = ?";
+        try (PreparedStatement declaracaoPreparada = conexao.prepareStatement(comandoSQL)) {
+            declaracaoPreparada.setString(1, id);
+            declaracaoPreparada.executeUpdate();
+        }
+    }
+    
+    // Busca preço do alimento no cardápio
+    public BigDecimal buscarPrecoAlimento(String alimento) throws SQLException {
+        String comandoSQL = "SELECT preco FROM cadastrodepedido WHERE alimento = ?";
+        try (PreparedStatement declaracaoPreparada = conexao.prepareStatement(comandoSQL)) {
+            declaracaoPreparada.setString(1, alimento);
+            ResultSet resultadoConsulta = declaracaoPreparada.executeQuery();
+            if (resultadoConsulta.next()) {
+                return resultadoConsulta.getBigDecimal("preco");
+            }
+            return BigDecimal.ZERO;
+        }
+    }
+    
+    // Verifica se alimento existe no cardápio
+    public boolean verificarAlimentoExiste(String alimento) throws SQLException {
+        String comandoSQL = "SELECT COUNT(*) FROM cadastrodepedido WHERE alimento = ?";
+        try (PreparedStatement declaracaoPreparada = conexao.prepareStatement(comandoSQL)) {
+            declaracaoPreparada.setString(1, alimento);
+            ResultSet resultadoConsulta = declaracaoPreparada.executeQuery();
+            return resultadoConsulta.next() && resultadoConsulta.getInt(1) > 0;
+        }
+    }
+    
+    // Lista todos os alimentos do cardápio
+    public java.util.List<String> listarCardapio() throws SQLException {
+        String comandoSQL = "SELECT alimento FROM cadastrodepedido ORDER BY alimento";
+        try (PreparedStatement declaracaoPreparada = conexao.prepareStatement(comandoSQL)) {
+            ResultSet resultadoConsulta = declaracaoPreparada.executeQuery();
+            java.util.List<String> cardapio = new java.util.ArrayList<>();
+            while (resultadoConsulta.next()) {
+                cardapio.add(resultadoConsulta.getString("alimento"));
+            }
+            return cardapio;
         }
     }
 }
