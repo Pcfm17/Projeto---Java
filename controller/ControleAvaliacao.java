@@ -12,8 +12,6 @@ import view.Avaliacao;
 public class ControleAvaliacao {
     private Avaliacao tela3;
 
-    // REMOVIDA A LINHA COM ERRO: // ControleCadastro c = new ControleCadastro(this);
-
     public ControleAvaliacao(Avaliacao tela3){
         this.tela3 = tela3;
     }
