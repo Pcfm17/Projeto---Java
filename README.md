@@ -238,11 +238,42 @@ O arquivo model:
    Ligado a bebida para comprir o requisito.
 
 9. PesquisaModel.java :
-    A classe PesquisaModel representa uma pesquisa feita por um usuário no sistema.
+   A classe PesquisaModel representa uma pesquisa feita por um usuário no sistema.
    Ela possui dois atributos principais: email, que identifica o usuário que realizou a pesquisa, e alimento, que guarda o nome do item pesquisado.
    A classe conta com um construtor para inicializar os dados e métodos getters para acessar essas informações, servindo como modelo para registrar e recuperar pesquisas realizadas no banco de dados. 
 
+O arquivo principal:
+   Apenas está iniciando a janela do cadastro sempre que esse código é inicializado.
 
+O arquivo view:
+1. Alimento.java :
+   Tem 2 botões sendo o de voltar para a janela inicial e um para buscar o alimento e na textArea vai aparecer o alimento digitado e as informações desse aliemnto.
 
+2. Avaliacao.java :
+   Tem uma avaliação de 1 a 5 estrelas, o email de quem avaliaou e a descrição sendo um textArea que o usuário pode deixar sua opnião de se gostou o não do programa.
+
+3. Bebida.java :
+   Tem 2 botões sendo o de voltar para a janela inicial e um para buscar a bebida e na textArea vai aparecer a bebida digitado e as informações desse aliemnto.
+
+4. CadastrarPedido.java :
+   Tem 6 botões sendo o de voltar para janela inicial, para criar um pedido, para deletar um pedido, para avaliar o programa, para editar o pedido e para o carrinho. Tem 5 áreas de texto sendo o de 2 de id, email, alimento ou bebida, um item já salvo e o item que quer colocar no lugar do salvo.
+
+5. Cadastro.java :
+   Tem 4 botões sendo o de cadastrar, o login e dois para a resposta de uma desição se é masculino ou feminino. Tem 3 locais de texto para escrever sendo o email, nome e a senha.
+
+6.  Carrinho.java :
+   Tem 4 botões sendo o de voltar para a janela inicial, o de pesquisar pelo id vendo os itend da lista de pedido, o de adicionar um alimento a lista e um de retirar um aliemnto da lista. Tem 3 lugares de texto sendo o id, o alimento e o local de textArea que vai aparecer os resultados.
+
+7. Historico.java :
+   Tem 2 botões sendo o de voltar a janela inicial e o de listar que lista todas as sua pesquisar. Tem 2 campos de texto sendo o do email e o textArea que vai aparecer o resultado das suas pesquisas.
+
+8. JanelaInicial.java :
+   Tem apenas os botões para facilitar para o usuário sendo os de pesquisa de alimento e bebida, cadastrar pedido, salvando a pesquisa e o de voltar para o cadastro.
+
+9. Login.java :
+    Tem 1 botão de login para ter o acesso. Tema 3 campos de texto sendo o email, nome e senha.
+
+10. Pesquisa.java :
+    Tem 3 botões sendo que o voltar leva de volta para a janela inicial, a pesquisa que salva toda vez que é clicado e o histórico. Tem 3 campos de texto sendo o email, buscar por alimento ou bebidae um textArea que aparece o resultado da pesquisa.
 
    
