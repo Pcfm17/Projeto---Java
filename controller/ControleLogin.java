@@ -15,7 +15,6 @@ public class ControleLogin {
 
     public void autenticar() {
         String email = telaLogin.getTxtEmail().getText();
-        // se quiser usar campo senha depois, mude aqui
         String senha = new String(telaLogin.getTxtSenha().getPassword()); 
 
         try {
